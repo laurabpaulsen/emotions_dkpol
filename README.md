@@ -20,5 +20,5 @@ The organization of the project is as follows:
 
 | Do | File| Output placement |
 |-----------|:------------|:--------|
-Scrape tweets | ```src/scrape_tweets.py````| ```../data/raw```
+Scrape tweets | ```src/scrape_tweets.py```| ```../data/raw```
 Clean tweets | ```src/clean_tweets.py``` | ```../data/preprocessed```
