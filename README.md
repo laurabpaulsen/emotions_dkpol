@@ -7,7 +7,8 @@ The organization of the project is as follows:
 
 ```
 ├── README.md                  <- The top-level README for this project.                        
-├── data                       
+├── data
+│   ├── party_info.json        <- Information on each party (Twitter account, hashtag)   
 │   ├── raw                    
 │   └── preproccessed                       
 ├── src                        <- main scripts
@@ -20,7 +21,4 @@ The organization of the project is as follows:
 | Do | File| Output placement |
 |-----------|:------------|:--------|
 Scrape tweets | ```src/scrape_tweets.py````| ```../data/raw```
-Summarize the emotion distributions | ```src/summarize_models.py``` | ```summarized_emo/```
-Run newsFluxus pipeline | ```src/emotionsFluxus.py``` | ```idmdl/```
-Smooth the signal | ```src/smoothing.py``` | ```idmdl/smoothed/```
-Identify change points | ```src/changepoints.py``` | ```idmdl/changepoints/```
+Clean tweets | ```src/clean_tweets.py``` | ```../data/preprocessed```
