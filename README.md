@@ -14,7 +14,8 @@ The organization of the project is as follows:
 ├── src                        <- main scripts
 │   ├── scrape_twitter.py
 │   ├── clean_data.py
-    └── create_party_info.py
+│   └── create_party_info.py
+├── fig
 
 ```
 
