@@ -1,6 +1,12 @@
 # Jupyter Notebook
 .ipynb_checkpoints
 
+# pyenv
+.venv
+
 # data
 data/preprocessed
 data/raw
+
+# newsFluxus
+newsFluxus
