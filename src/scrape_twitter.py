@@ -33,6 +33,7 @@ def scrape(string, type, party):
         
     # Creating a dataframe from the tweets list above 
     tweets_df = pd.DataFrame(attributes_container, columns=[ "username", "date_created", "number_of_likes", "tweets", "language"])
+    tweets_df['party'] = party
 
     # save to csv
     tweets_df.to_csv(out_path, index=False)
