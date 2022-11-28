@@ -29,3 +29,6 @@ python src/summarize_emotions.py --filepath data/preprocessed/dk_pol_data_emotio
 # use newsFluxus to get novelty, resonnance and transience
 python src/emotion_fluxus.py --filenames emotions_summarized_date
 python src/emotion_fluxus.py --filenames emotions_summarized_date_hour
+
+# create plots
+python src/generate_plots.py

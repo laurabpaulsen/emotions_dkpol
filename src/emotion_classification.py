@@ -6,14 +6,7 @@ Inspired by: emoDynamics (https://github.com/saraoe/emoDynamics)
 
 import pandas as pd
 import os
-
-import ssl
-import spacy
-from spacy.tokens import Doc
-from dacy.sentiment import (add_bertemotion_emo, da_vader_getter)
 from transformers import pipeline
-
-
 
 
 def classify_emotions(df, nlp):
@@ -44,16 +37,12 @@ def classify_emotions(df, nlp):
 
 
 if __name__ == '__main__':
-    print('Loading data...')
     df = pd.read_csv(os.path.join('data', 'preprocessed', 'dk_pol_data.csv'))
-
-    #ssl._create_default_https_context = ssl._create_unverified_context
 
     model_path = "NikolajMunch/danish-emotion-classification"
     nlp = pipeline("sentiment-analysis", model=model_path, tokenizer=model_path, return_all_scores=True)
     
     df = classify_emotions(df, nlp=nlp)
-
     df.to_csv(os.path.join('data', 'preprocessed', 'dk_pol_data_emotions.csv'), index=False)
 
 
