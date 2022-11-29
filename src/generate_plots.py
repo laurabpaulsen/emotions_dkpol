@@ -20,19 +20,23 @@ def plot_all_grid(df, figsize=(20, 10), normalize=True):
 
     date_form = mdates.DateFormatter("%b-%Y")
 
+    df = df.sort_values(by='date_created')
+
     emotions = ['Afsky', 'Frygt', 'Glæde', 'Overraskelse', 'Tristhed', 'Vrede']
 
     for i, ax in enumerate(axes.flatten()):
         if normalize: #min max normalisation
             emotion = (df[emotions[i]] - df[emotions[i]].min()) / (df[emotions[i]].max() - df[emotions[i]].min())
-        ax.plot(df['date_created'], emotion, color = palette[i], alpha=0.3)
+        ax.plot(df['date_created'], emotion, color = palette[i], alpha=0.2)
 
         # plot smoothed line
-        gaussian = emotion.rolling(window=20, win_type='gaussian', center=True, min_periods=1).mean(std = 1)
+        gaussian = emotion.rolling(window=100, win_type='gaussian', center=True, min_periods=1).mean(std = 3)
         ax.plot(df['date_created'], gaussian, color = palette[i], label = emotions[i], alpha=1)
 
         ax.xaxis_date()
         ax.xaxis.set_major_formatter(date_form)
+        # turn xticks 90 degrees
+        plt.setp(ax.get_xticklabels(), rotation=90, ha='center')
         ax.set_title(emotions[i])
 
     fig.suptitle('Normalized emotions', fontsize=20)
@@ -45,9 +49,11 @@ def plot_fluxus(df, figsize=(20, 10), filename='fluxus.png'):
     Plots transience, novelty and resonance
     """
     matplotlib.rcParams['font.family'] = 'serif'
-    fig, axes = plt.subplots(3, 1, figsize=figsize, sharex=True, sharey=True)
+    fig, axes = plt.subplots(3, 1, figsize=figsize, sharex=True)
 
     date_form = mdates.DateFormatter("%b-%Y")
+    #sort by date
+    df = df.sort_values(by='date')
 
     for i, ax in enumerate(axes.flatten()):
         ax.plot(df['date'], df.iloc[:, 2+i], color = palette[i], alpha=0.3)
@@ -55,10 +61,18 @@ def plot_fluxus(df, figsize=(20, 10), filename='fluxus.png'):
         # plot smoothed line
         gaussian = df.iloc[:, 2+i].rolling(window=20, win_type='gaussian', center=True, min_periods=1).mean(std = 1)
         ax.plot(df['date'], gaussian, color = palette[i], alpha=1)
+        
+        # day of election
+        ax.axvline(x=pd.to_datetime('2022-11-01', format = '%Y-%m-%d'), color='black', linestyle='--', alpha=0.5)
+        
+        # valget udskrives
+        ax.axvline(x=pd.to_datetime('2022-10-05', format = '%Y-%m-%d'), color='black', linestyle='--', alpha=0.5)
 
         ax.xaxis_date()
         ax.xaxis.set_major_formatter(date_form)
         ax.set_title(df.columns[2+i])
+
+
 
     plt.savefig(os.path.join('fig', filename))
 
