@@ -1,18 +1,18 @@
 # emotions_dkpol
-This repository holds the code for the final project for Cultural Data Science
+This repository holds the code for the final project for Cultural Data Science. The aim is to investigate the dynamics on danish twitter before, during and after the election in November 2022. This is done using emotion classification followed summarising the probablitity distributions of the emotions. Finally relative entropy measures, novelty, resonance and transience, are found for the probability distributions. 
 
 
-## Project Organization
-The organization of the project is as follows:
+## Project Structure
+The structure of the project is as follows:
 
 ```
 ├── README.md                                       
-├── data
-│   ├── party_info.json        <- information on each party (Twitter account, hashtag)
-│   ├── emotions_summarised   
+├── data     
+│   ├── emotions_summarised    
 │   ├── idmdl
-│   ├── raw                    
-│   └── preproccessed    
+│   ├── preproccessed   
+│   ├── raw
+│   └── party_info.json        <- information on each party (Twitter account, hashtag)  
 ├── fig                   
 ├── src                        <- main scripts
 │   ├── clean_data.py
@@ -25,7 +25,6 @@ The organization of the project is as follows:
 ├── .gitignore
 ├── requirements.txt
 └── run.sh
-
 ```
 
 ## Pipeline
@@ -42,4 +41,4 @@ Generate plots | ```src/generate_plots.py``` | ```fig```
 
 
 ## Acknowledgements
-Thanks to Sara and Stine and their emoDynamics project for being the source of inspiration for this project. Thanks to Center for Humanities computing for developing the newsFluxus package.
+Thanks to Sara Møller Østergaard and Stine Nyhus and their emoDynamics project for being the source of inspiration for this project. Thanks to Center for Humanities computing for developing the newsFluxus package.
