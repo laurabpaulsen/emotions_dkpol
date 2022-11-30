@@ -32,31 +32,31 @@ def classify_emotions(df):
     print('Classifying emotions...')
 
     df = df.reset_index()
-    df['emotion'] = [nlp(tweet) if type(tweet)=='str' else '' for tweet in tqdm(df['clean_tweet'])]
-
+    df['emotion'] = [nlp(tweet) if type(tweet)==str else '' for tweet in tqdm(df['clean_tweet'])]
+    
     # create a new column for each emotion
     for i in range(len(df['emotion'])):
         emotions = df['emotion'][i] # getting one row
-        for emotion in range(6): # getting one emotion
-            emo = emotions[0][emotion]
-            label = emo['label']
-            prob = emo['score']
-            df.loc[i, label] = prob
+        if emotions != '':
+            for emotion in range(6): # getting one emotion
+                emo = emotions[0][emotion]
+                print(emotions[0][emotion])
+                label = emo['label']
+                prob = emo['score']
+                df.loc[i, label] = prob
 
     return df
 
 
 if __name__ == '__main__':
     df = pd.read_csv(os.path.join('data', 'preprocessed', 'dk_pol_data.csv'))
-    #df['clean_tweet'] = df['clean_tweet'].astype(str)
 
-    df_chunks = split_dataframe(df, chunk_size = 7500)
+    df_chunks = split_dataframe(df, chunk_size = 10000)
 
-    p = mp.Pool(mp.cpu_count()-2)
+    p = mp.Pool(mp.cpu_count())
     results = p.map(classify_emotions, df_chunks)
     df = pd.concat(results, axis=0)
     
-    #df = classify_emotions(df, nlp=nlp)
     df.to_csv(os.path.join('data', 'preprocessed', 'dk_pol_data_emotions.csv'), index=False)
 
 
