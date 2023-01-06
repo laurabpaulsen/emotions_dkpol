@@ -64,7 +64,7 @@ def extract_excluded_emos(
     out_folder: str,
     out_name: str,
     window: int,
-    labels: List[str] = ['Afsky', 'Frygt', 'Glæde', 'Overraskelse', 'Tristhed','Vrede']):
+    labels: List[str] = ["Glæde", "Overraskelse", "Vrede", "Tristhed", "Afsky", "Frygt"]):
     """
     Extracts novelty, transience and resonance excluding each emotion one at a time
     Writes to csv
@@ -116,7 +116,6 @@ def main(filenames: List[str], window: int):
         extract_excluded_emos(filename, out_folder, file, window)
 
 
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -132,4 +131,3 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     main(filenames=args.filenames, window=args.window)
-

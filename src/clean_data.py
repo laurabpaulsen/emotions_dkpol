@@ -6,6 +6,7 @@ import pandas as pd
 import os
 import re
 from tqdm import tqdm
+import multiprocessing as mp
 
 
 def clean_tweet(tweet):
@@ -30,10 +31,13 @@ if __name__ in '__main__':
     path = os.path.join('..', 'data', 'raw')
     files = os.listdir(os.path.join('data', 'raw'))
     df = pd.concat([pd.read_csv(os.path.join('data', 'raw', file)) for file in files], ignore_index=True)
-    #df.drop_duplicates(inplace=True)
+    df.drop_duplicates(inplace=True)
+    df.reset_index(drop=True, inplace=True)
     
     df['clean_tweet'] = ''
-    for i in tqdm(range(len(df))):
-        df['clean_tweet'][i] = clean_tweet(df['tweets'][i])
+
+    # clean tweets using multiprocessing
+    with mp.Pool(mp.cpu_count()) as p:
+        df['clean_tweet'] = list(tqdm(p.imap(clean_tweet, df['tweets'])))
 
     df.to_csv(os.path.join('data', 'preprocessed', 'dk_pol_data.csv'), index=False)

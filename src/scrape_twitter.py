@@ -8,6 +8,7 @@ import snscrape.modules.twitter as sntwitter
 import pandas as pd
 import multiprocessing as mp
 import json
+from tqdm import tqdm
 
 def scrape(string, type, party):
     """Scrapes tweets from Twitter using the TwitterSearchScraper package and saves them to a csv file.
@@ -27,9 +28,9 @@ def scrape(string, type, party):
     out_path = f'data/raw/{party}_{out_type}.csv'
     attributes_container = []
 
-    for tweet in sntwitter.TwitterSearchScraper(f'{type}{string} since:2022-05-01 until:2022-11-27').get_items():
+    for tweet in sntwitter.TwitterSearchScraper(f'{type}{string} since:2022-07-01 until:2022-11-27').get_items():
         if tweet.lang == 'da':
-            attributes_container.append([tweet.username, tweet.date, tweet.likeCount, tweet.content, tweet.lang])
+            attributes_container.append([tweet.user.username, tweet.date, tweet.likeCount, tweet.content, tweet.lang])
         
     # Creating a dataframe from the tweets list above 
     tweets_df = pd.DataFrame(attributes_container, columns=[ "username", "date_created", "number_of_likes", "tweets", "language"])
@@ -53,5 +54,6 @@ if __name__ == '__main__':
     inputs.append(['dkpol', '#', 'dkpol'])
 
     with mp.Pool(mp.cpu_count()) as pool:
-        pool.starmap(scrape, inputs)
+        for _ in tqdm(pool.starmap(scrape, inputs), total=len(inputs)):
+            pass
 
