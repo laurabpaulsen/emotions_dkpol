@@ -1,15 +1,8 @@
-# create environment
-python3.8 -m venv .venv
-
-# activate environment
-source .venv/bin/activate
+# use conda to create environment from environment.yml
+conda env create -f environment.yml
 
 # get newsFluxus package from Centre for humanities computing
 git clone https://github.com/centre-for-humanities-computing/newsFluxus.git
-
-# install dependencies
-pip install -r newsFluxus/requirements.txt
-pip install -r requirements.txt
 
 # create json file with information about the parties
 python create_party_info.py

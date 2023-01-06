@@ -5,8 +5,11 @@
 .venv
 
 # data
-data/preprocessed
-data/raw
+data/preprocessed/*
+data/raw/*
+data/idmdl/*
+data/emotions_summarised/*
 
 # newsFluxus
 newsFluxus
+*__pycache__*
