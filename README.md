@@ -42,4 +42,4 @@ Generate plots | ```src/generate_plots.py``` | ```fig```
 
 
 ## Acknowledgements
-Thanks to Sara Møller Østergaard's [emoDynamics](https://github.com/saraoe/emoDynamics) project for being the source of inspiration for this project. Thanks to Center for Humanities computing for developing the [newsFluxus](https://github.com/centre-for-humanities-computing/newsFluxus)tool.
+Thanks to Sara Møller Østergaard's [emoDynamics](https://github.com/saraoe/emoDynamics) project for being the source of inspiration for this project. Thanks to Center for Humanities computing for developing the [newsFluxus](https://github.com/centre-for-humanities-computing/newsFluxus) tool.
