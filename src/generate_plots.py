@@ -74,7 +74,7 @@ def plot_all_grid(df, figsize=(20, 10), normalize=True):
     
     plt.savefig(save_path)
 
-def plot_emotions(df, figsize=(10, 10), normalize=True):
+def plot_emotions(df, figsize=(10, 6), normalize=True):
     """ 
     Plots the emotions of the tweets. One plot for all emotions.
     """
